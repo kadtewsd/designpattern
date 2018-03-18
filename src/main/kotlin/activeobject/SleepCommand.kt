@@ -14,7 +14,6 @@ class SleepCommand(private val name: String, private val sleepTime: Long, privat
     override fun execute() {
         val currentTime = System.currentTimeMillis();
         if (!started()) {
-            this.started = true
             println("$name is started. value is $value. current time is $currentTime")
             startTime = currentTime
             this.engine.addCommand(this)

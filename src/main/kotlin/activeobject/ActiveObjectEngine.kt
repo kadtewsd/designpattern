@@ -3,7 +3,7 @@ package activeobject
 import java.util.*
 
 fun main(args:Array<String>) {
-    loop@ for (i in 1..100) {
+    for (i in 1..100) {
         println("-----------------------------------")
         println("start Active Object Pattern...")
         println()
