@@ -2,15 +2,21 @@ package activeobject
 
 class SleepCommand(private val name: String, private val sleepTime: Long, private val value: String, private val engine: ActiveObjectEngine, private val wakeupCommand: Command) : Command {
 
-    private var started: Boolean = false
+    private var counter = 0
+    // クラス初期化時に開始時刻を入れてしまうとだとわずかな誤差が生じにくいのでマルチスレッドみたくならない。
+//    private val startTime: Long = System.currentTimeMillis()
     private var startTime: Long = 0
+
+    private fun started(): Boolean {
+        return ++counter > 1
+    }
 
     override fun execute() {
         val currentTime = System.currentTimeMillis();
-        if (!started) {
+        if (!started()) {
+            this.started = true
             println("$name is started. value is $value. current time is $currentTime")
-            started = true
-            this.startTime = currentTime
+            startTime = currentTime
             this.engine.addCommand(this)
             return
         }
