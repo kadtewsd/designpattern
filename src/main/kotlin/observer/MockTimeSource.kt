@@ -1,27 +1,15 @@
 package observer
 
-class MockTimeSource : Subject(), TimeSource {
-
-    var itsHours = 0
-    var itsMinuts = 0
-    var itsSecond = 0
-
-    fun setTime(hours: Int, minutes: Int, seconds: Int) {
-        itsHours = hours
-        itsMinuts = minutes
-        itsSecond = seconds
+class MockTimeSource(override var hours: Int, override var minutes: Int, override var seconds: Int) : Subject(), TimeSource {
+    fun setTime() {
         notifyObservers()
     }
 
-    override fun hours(): Int {
-        return itsHours
-    }
+    fun setTime(hours: Int, minutes: Int, seconds: Int) {
+        this.hours = hours
+        this.minutes = minutes
+        this.seconds = seconds
+        this.setTime()
 
-    override fun minutes(): Int {
-        return itsMinuts
-    }
-
-    override fun seconds(): Int {
-        return itsSecond
     }
 }

@@ -7,11 +7,11 @@ class TestClockDriver {
 
     @Test
     fun testTimeChange() {
-        val source = MockTimeSource()
+        val source = MockTimeSource(3, 4, 5)
         val sink = MockTimeSink(source)
         source.registerObserver(sink)
 
-        source.setTime(3, 4, 5)
+        source.setTime()
         assertEquals(3, sink.getHours())
         assertEquals(4, sink.getMinutes())
         assertEquals(5, sink.getSeconds())

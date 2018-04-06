@@ -6,9 +6,9 @@ class MockTimeSink(val timeSource: TimeSource) : Observer {
     var itsMinuts = 0
     var itsSecond = 0
     override fun update() {
-        itsHours = timeSource.hours()
-        itsMinuts = timeSource.minutes()
-        itsSecond = timeSource.seconds()
+        itsHours = timeSource.hours
+        itsMinuts = timeSource.minutes
+        itsSecond = timeSource.seconds
     }
     fun getHours(): Int {
         return itsHours
