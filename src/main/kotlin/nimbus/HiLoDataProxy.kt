@@ -49,7 +49,7 @@ class Store {
     companion object {
         var list: MutableList<HiLoData> = mutableListOf()
         fun store(hilo:HiLoData) {
-
+            list.add(hilo)
         }
     }
 }
