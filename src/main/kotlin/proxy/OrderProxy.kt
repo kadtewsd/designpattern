@@ -1,7 +1,5 @@
 package proxy
 
-import kotlin.system.exitProcess
-
 class OrderProxy(val orderId: Int) : Order {
 
     override val customerId: String

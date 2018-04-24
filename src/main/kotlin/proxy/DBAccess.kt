@@ -17,7 +17,7 @@ class DBAccess {
 
         fun getItemsForOrder(orderId: Int): MutableList<ItemData> {
             return arrayListOf(
-                ItemData(1, 1, "radio"),
+                    ItemData(1, 1, "radio"),
                     ItemData(1, 1, "book"),
                     ItemData(2, 10, "office"),
                     ItemData(3, 11, "license"),
@@ -26,7 +26,7 @@ class DBAccess {
 
         }
 
-        fun store(itemData:ItemData) {
+        fun store(itemData: ItemData) {
             list.add(itemData)
         }
     }
