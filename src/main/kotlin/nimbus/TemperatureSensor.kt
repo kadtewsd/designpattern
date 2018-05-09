@@ -2,5 +2,4 @@ package nimbus
 
 import java.util.*
 
-class TemperatureSensor : Observable() {
-}
+class TemperatureSensor : Observable()
