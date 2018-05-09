@@ -3,5 +3,5 @@ package nimbus
 import java.util.*
 
 interface AlarmListener : EventListener {
-    fun wakeup()
+    fun wakeup(current:Double, time:Long)
 }

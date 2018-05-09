@@ -2,12 +2,20 @@ package nimbus
 
 import java.io.Serializable
 
-class HiLoDataProxy(override var highValue: Double, override var highTime: Long, override var lowValue: Double, override var lowTime: Long) : HiLoData {
+class HiLoDataProxy : HiLoData {
+    override val highValue: Double
+        get() = hiLoData.highValue
+    override val highTime: Long
+        get() = hiLoData.highTime
+    override val lowValue: Double
+        get() = hiLoData.lowValue
+    override val lowTime: Long
+        get() = hiLoData.lowTime
 
-    var hiLoData: HiLoData = HiLoDataImpl(highValue, highTime, lowValue, lowTime)
+    var hiLoData: HiLoData = HiLoDataImpl()
 
-    override fun currentReding(current: Double, time: Long) : Boolean {
-        if (!hiLoData.currentReding(current, time)) return false;
+    override fun currentReding(temperature: Double, time: Long) : Boolean {
+        if (!hiLoData.currentReding(temperature, time)) return false;
         store()
         return true
     }
@@ -21,27 +29,39 @@ class HiLoDataProxy(override var highValue: Double, override var highTime: Long,
     private fun store() {
         Store.store(hilo = hiLoData);
     }
-
 }
 
-class HiLoDataImpl(override var highValue: Double, override var highTime: Long, override var lowValue: Double, override var lowTime: Long) : HiLoData, Serializable {
+class HiLoDataImpl : HiLoData, Serializable {
+    override val highValue: Double
+        get() = this._highValue
+    override val highTime: Long
+        get() = this._highTime
+    override val lowValue: Double
+        get() = this._lowValue
+    override val lowTime: Long
+        get() = this._lowTime
 
-    override fun currentReding(current: Double, time: Long): Boolean {
-        if (current > highValue) {
-            this.highValue = highValue
-            this.highTime = highTime
-        } else if (current < lowValue) {
-            this.lowValue = highValue
-            this.lowTime = highTime
+    private var _highValue: Double = -1.0
+    private var _highTime: Long = -1L
+    private var _lowValue: Double = -1.0
+    private var _lowTime: Long = -1L
+
+    override fun currentReding(temperature: Double, time: Long): Boolean {
+        if (temperature > highValue) {
+            this._highValue = temperature
+            this._highTime = time
+        } else if (temperature < _lowValue) {
+            this._lowValue = temperature
+            this._lowTime = time
         }
-        return this.highValue == current || this.lowValue == current
+        return this._highValue == temperature || this._lowValue == temperature
     }
 
     override fun newDay(initial: Double, time: Long) {
-        highTime = time
-        lowTime = time
-        highValue = initial
-        lowValue = initial
+        _highTime = time
+        _lowTime = time
+        _highValue = initial
+        _lowValue = initial
     }
 }
 
