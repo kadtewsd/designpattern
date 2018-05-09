@@ -1,0 +1,3 @@
+package acyclicvisitor
+
+interface AcyclicModemVisitor

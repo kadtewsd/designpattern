@@ -1,7 +1,7 @@
 package abstractserver
 
 class Switch {
-    val switchalbe: Switchable;
+    val switchalbe: Switchable
 
     init {
         this.switchalbe = Light()
