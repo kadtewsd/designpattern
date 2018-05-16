@@ -1,0 +1,3 @@
+package extensionobject
+
+interface PartExtension
