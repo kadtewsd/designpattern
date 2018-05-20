@@ -12,13 +12,13 @@ class DBAccess {
         }
 
         fun getOrderData(orderId:Int): OrderData {
-            return OrderData(1, "kasakaid")
+            return OrderData(orderId, "kasakaid")
         }
 
         fun getItemsForOrder(orderId: Int): MutableList<ItemData> {
             return arrayListOf(
-                    ItemData(1, 1, "radio"),
-                    ItemData(1, 1, "book"),
+                    ItemData(orderId, 1, "radio"),
+                    ItemData(orderId, 1, "book"),
                     ItemData(2, 10, "office"),
                     ItemData(3, 11, "license"),
                     ItemData(3, 11, "sake")

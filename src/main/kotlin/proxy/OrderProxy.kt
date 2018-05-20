@@ -1,9 +1,14 @@
 package proxy
 
-class OrderProxy(val orderId: Int) : Order {
+class OrderProxy(var orderId: Int) : Order {
+
+    private fun orderId() : Int {
+        this.orderId = 1;
+        return this.orderId
+    }
 
     override val customerId: String
-        get() = DBAccess.getOrderData(this.orderId).customerId
+        get() = DBAccess.getOrderData(this.orderId()).customerId
 
     override fun total(): Int {
         val imp = OrderImpl(this.customerId)

@@ -15,7 +15,7 @@ class VisitorTest {
 
         var p1 = false
         var p2 = false
-        var a = false
+        var aFound = false
         val foo = object : PartVisitor {
             override fun visit(pp: PiecePart) {
                 if (picePart1 == pp) {
@@ -26,9 +26,9 @@ class VisitorTest {
                 }
             }
 
-            override fun visit(argAssm: Assembly) {
-                if (argAssm == assm) {
-                    a = true
+            override fun visit(a: Assembly) {
+                if (a == assm) {
+                    aFound = true
                 }
             }
 
@@ -41,7 +41,7 @@ class VisitorTest {
 
         assertTrue(p1)
         assertTrue(p2)
-        assertTrue(a)
+        assertTrue(aFound)
     }
 
    @Test
